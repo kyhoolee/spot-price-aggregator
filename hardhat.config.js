@@ -1,3 +1,5 @@
+require('dotenv').config(); // 👈 this line loads your .env variables
+
 require('@matterlabs/hardhat-zksync-deploy');
 require('@matterlabs/hardhat-zksync-solc');
 require('@nomicfoundation/hardhat-ethers');
@@ -18,7 +20,16 @@ if (getNetwork().indexOf('zksync') !== -1) {
     require('@nomicfoundation/hardhat-verify');
 }
 
-const { networks, etherscan } = (new Networks(true, 'mainnet', true)).registerAll();
+const { networks, etherscan } = (new Networks(true, 'avax', true)).registerAll();
+
+networks.hardhat.chains = {
+    43114: {
+        hardforkHistory: {
+            shanghai: 11404279,  // fake numbers to satisfy Hardhat
+            cancun: 41263126,
+        },
+    },
+};
 
 module.exports = {
     solidity: {

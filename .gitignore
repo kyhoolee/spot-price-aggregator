@@ -7,8 +7,9 @@ artifacts
 cache
 artifacts-zk
 cache-zk
-.env
+# .env
 .idea
 solcInputs
 *.log
 deployments/hardhat
+tmp
